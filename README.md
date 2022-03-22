@@ -28,15 +28,18 @@ Here is a single validity annotation example:
 ```
 {
  'dataset': 'ELI5',
- 'is_valid': False,
- 'question': "Why can't we tickle ourselves?",
- 'q_id': '2edl71',
- 'a_id': 'cjyhbns',
- 'answer_paragraph': 'I can. Am I a mutant? Is this my power?',
- 'answer_sentences': ['I can.', 'Am I a mutant?', 'Is this my power?'],
- 'invalid_reason': 'no_valid_answer: 3',
- 'question_validity_count': 0.0
-}
+ 'question': 'What do business people actually do all day?',
+ 'q_id': '1ep39o',
+ 'a_id': 'ca2m2in',
+ 'answer_paragraph': "Drink coffee. Stand around the watercooler. Show pictures of their kids to people who don't care. Dream of retirement.",
+ 'answer_sentences': ['Drink coffee.',
+  'Stand around the watercooler.',
+  "Show pictures of their kids to people who don't care.",
+  'Dream of retirement.'],
+  'is_valid': False,
+  'invalid_reason': 'no_valid_answer: 3,nonsensical_question: 1',
+  'question_validity_count': 0
+ }
 ```
 
 
@@ -58,9 +61,9 @@ Here is a single role annotation example:
 ```
 {
  'dataset': 'ELI5',
- 'question': 'How does a silencer on a fire arm work?',
  'q_id': '29gy6c',
  'a_id': 'ciksl73',
+ 'question': 'How does a silencer on a fire arm work?',
  'answer_paragraph': "The aim of a silencer is to break up/soften the noise of the weapon firing. It does this by directing the air leaving the muzzle through a series of baffles, slowing and redirecting the air so that it will form a 'softer' noise, rather than a single loud pulse.\n\nThe noise you hear in the movies is not representative of the average silenced weapon, but is a plot device to let bad (or good) guys do their job steathily. In practice, the silencer will reduce the noise and make it harder to pinpoint, but will not give anything like as significant a reduction in volume",
  'answer_sentences': ['The aim of a silencer is to break up/soften the noise of the weapon firing.',
   "It does this by directing the air leaving the muzzle through a series of baffles, slowing and redirecting the air so that it will form a 'softer' noise, rather than a single loud pulse.\n",
