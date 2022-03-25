@@ -18,10 +18,9 @@ Each example is a json with the following field:
 * `a_id`: The answer id, same as the original ELI5 dataset. For NQ, we populate a dummy `a_id`. For machine generated answers, this field corresponds to the name of the model. For Web-GPT answers, this field will be 'Human demonstration'.
 * `question`: The question.
 * `answer_paragraph`: The answer paragraph.
-* `answer_sentences`: The list of answer sentences, tokenzied from the answer paragraph.
-* `is_valid`: A boolean value indicating whether the qa pair is valid.
-* `question_validity_count`: The number of annotator that selected this pair as valid.
-* `invalid_reason`: A string consisting comma-separated invalid reason annotations, in the format of `{$invalid_reason: count of annotations for $invalid_reason}`.
+* `answer_sentences`: The list of answer sentences, tokenized from the answer paragraph.
+* `is_valid`: A boolean value indicating whether the qa pair is valid, values: [`True`, `False`].
+* `invalid_reason`: A list of list, each list contains the invalid reason the annotator selected. The invalid reason is one of [`no_valid_answer`, `nonsensical_question`, `assumptions_rejected`, `multiple_questions`].
 
 Here is a single validity annotation example: 
 
@@ -37,8 +36,8 @@ Here is a single validity annotation example:
   "Show pictures of their kids to people who don't care.",
   'Dream of retirement.'],
   'is_valid': False,
-  'invalid_reason': 'no_valid_answer: 3,nonsensical_question: 1',
-  'question_validity_count': 0
+  'invalid_reason': [['no_valid_answer', 'nonsensical_question'], 
+  ['no_valid_answer'], ['no_valid_answer']],
  }
 ```
 
@@ -53,31 +52,30 @@ Each example is a json with the following field:
 * `a_id`: The answer id, same as the original ELI5 dataset. For NQ, we populate a dummy `a_id` (1). For machine generated answers, this field corresponds to the name of the model. 
 * `question`: The question.
 * `answer_paragraph`: The answer paragraph.
-* `answer_sentences`: The list of answer sentences, tokenzied from the answer paragraph.
-* `role_annotation`: The list of majority role (or adjudicated) role (if exists), for the sentence in `answer_sentences`.
-* `detail_role_annotation`: The list of strings with comma-separated detailed role annotations for the sentence in `answer_sentences`, in the format of `{role: count of annotation for role}`.
+* `answer_sentences`: The list of answer sentences, tokenized from the answer paragraph.
+* `role_annotation`: The list of majority role (or adjudicated) role (if exists), for the sentences in `answer_sentences`. Each role is one of [`Answer`, `Answer - Example`, `Answer (Summary)`, `Auxiliary Information`, `Answer - Organizational sentence`, `Miscellaneous`]
+* `raw_role_annotation`: A list of list, each list contains the raw role annotation for sentences in `answer_sentences`.
 
 Here is a single role annotation example: 
 ```
-{
- 'dataset': 'ELI5',
- 'q_id': '29gy6c',
- 'a_id': 'ciksl73',
- 'question': 'How does a silencer on a fire arm work?',
- 'answer_paragraph': "The aim of a silencer is to break up/soften the noise of the weapon firing. It does this by directing the air leaving the muzzle through a series of baffles, slowing and redirecting the air so that it will form a 'softer' noise, rather than a single loud pulse.\n\nThe noise you hear in the movies is not representative of the average silenced weapon, but is a plot device to let bad (or good) guys do their job steathily. In practice, the silencer will reduce the noise and make it harder to pinpoint, but will not give anything like as significant a reduction in volume",
- 'answer_sentences': ['The aim of a silencer is to break up/soften the noise of the weapon firing.',
-  "It does this by directing the air leaving the muzzle through a series of baffles, slowing and redirecting the air so that it will form a 'softer' noise, rather than a single loud pulse.\n",
-  'The noise you hear in the movies is not representative of the average silenced weapon, but is a plot device to let bad (or good) guys do their job steathily. ',
-  'In practice, the silencer will reduce the noise and make it harder to pinpoint, but will not give anything like as significant a reduction in volume'],
- 'role_annotation': ['Answer',
-  'Answer (Summary)',
-  'Auxiliary Information',
-  'Auxiliary Information'],
- 'detail_role_annotation': ['Answer: 2,Answer (Summary): 1',
-  'Answer: 1,Answer (Summary): 2',
-  'Auxiliary Information: 3',
-  'Answer: 1,Auxiliary Information: 2']
-}
+{'dataset': 'ELI5',
+ 'q_id': '7c0lcl',
+ 'a_id': 'dpmf1xr',
+ 'question': 'Why are there such drastic differences in salaries between different countries?',
+ 'answer_paragraph': "I'm going to avoid discussing service industries, because they are drastically different and less subject to the global market (You can't work construction in Detroit and Munich on the same day)\n\nI'm mostly talking tech. \n\nThe biggest driver of disparity in tech jobs is cost of living. If it costs 2000 a month to live in Boston, and 200 a month to live in India, then salaries will reflect that. \n\nCompanies aren't in the business of lowering profits to give employees extra spending money.",
+ 'answer_sentences': ["I'm going to avoid discussing service industries, because they are drastically different and less subject to the global market (You can't work construction in Detroit and Munich on the same day)\n",
+  "I'm mostly talking tech.",
+  'The biggest driver of disparity in tech jobs is cost of living.',
+  'If it costs 2000 a month to live in Boston, and 200 a month to live in India, then salaries will reflect that. ',
+  "Companies aren't in the business of lowering profits to give employees extra spending money."],
+ 'role_annotation': ['Auxiliary Information', 'Miscellaneous', 'Answer (Summary)', 'Answer - Example', 'Auxiliary Information'],
+ 'raw_role_annotation': [['Miscellaneous',
+   'Auxiliary Information',
+   'Auxiliary Information'],
+  ['Miscellaneous', 'Auxiliary Information', 'Answer'],
+  ['Answer (Summary)', 'Answer (Summary)', 'Answer (Summary)'],
+  ['Answer (Summary)', 'Answer - Example', 'Answer - Example'],
+  ['Auxiliary Information', 'Auxiliary Information', 'Answer']]}
 ```
 
 ### NQ complex questions
@@ -153,7 +151,7 @@ python run_t5_role_classifier.py \
 ```
 
 
-# Citations
+# Citation and contact
 If you find our work helpful, please cite us as
 
 ```
@@ -166,5 +164,4 @@ If you find our work helpful, please cite us as
 }
 ```
 
-# Contact
-Please contact at `fangyuan@utexas.edu` if you have any questions.
+Please contact Fangyuan Xu at `fangyuan[at]utexas.edu` if you have any questions or suggestions.
