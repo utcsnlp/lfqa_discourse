@@ -119,10 +119,21 @@ We release our role classification model as well as the train/validation/test an
 Please follow the instruction below to reproduce our result or run sentence classification on your own data.
 
 ### Install the requirements
-Install conda and run the following command:
 ```bash
-conda env create -f role_classifier/environment.yml
-cd role_classifier
+$ git clone https://github.com/utcsnlp/lfqa_discourse.git
+$ cd role_classifier
+```
+
+This code has been tested with Python 3.7:
+```bash
+$ pip install -r requirements.txt
+```
+
+If you're using a conda environment, please use the following commands:
+```bash
+$ conda create -n lfqa_role_classifier python=3.7
+$ conda activate lfqa_role_classifier
+$ pip install -r requirements.txt
 ```
 
 ### Download the pre-trained model
