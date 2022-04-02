@@ -2,10 +2,13 @@
 
 ## Introduction
 This is the repository for annotated data and model for this paper: </br>
-Fangyuan Xu, Junyi Jessy Li and Eunsol Choi. [How Do We Answer Complex Questions: Discourse Structure of Long-form Answers](https://arxiv.org/abs/2203.11048). In: Proceedings of ACL. 2022.
+
+> Fangyuan Xu, Junyi Jessy Li and Eunsol Choi. [How Do We Answer Complex Questions: Discourse Structure of Long-form Answers](https://arxiv.org/abs/2203.11048). In: Proceedings of ACL. 2022.
+
+✨ Check out our [website](https://www.cs.utexas.edu/~fxu/lfqa_discourse/index.html) for sample annotations and demo!
 
 We annotated sentence-level functional roles of long-form answers from three datasets ([NQ](https://ai.google.com/research/NaturalQuestions), [ELI5](https://facebookresearch.github.io/ELI5/explore.html) and the human demonstrations from [WebGPT](https://openai.com/blog/webgpt/)) as well as a subset of model-generated answers from [previous work](https://github.com/martiansideofthemoon/hurdles-longform-qa). We analyzed their discourse structure and trained a role classification [model](https://github.com/utcsnlp/lfqa_discourse#model) which can be used for automatic role analysis.
- 
+
 
 ## Data
 
@@ -16,7 +19,7 @@ Validity annotation is the binary classification task of determining whether a (
 Annotations for this task is stored in `data/validity_annotation.jsonl`, which contains 1,591 (question, answer) pairs.
 
 Each example is a json with the following field:
-* `dataset`: The dataset this QA pair belongs to, one of [`NQ`, `ELI5`, `Web-GPT`]. Note that `ELI5` contains both human-written answers and model-generated answers, with model-generated answer distinguished with the `a_id` field mentioned below.
+* `dataset`: The dataset this QA pair belongs to, one of [`NQ`, `ELI5`, `Web-GPT`, `ELI5_MODEL`]. 
 * `q_id`: The question id, same as the original NQ or ELI5 dataset.
 * `a_id`: The answer id, same as the original ELI5 dataset. For NQ, we populate a dummy `a_id`. For machine generated answers, this field corresponds to the name of the model. For Web-GPT answers, this field will be 'Human demonstration'.
 * `question`: The question.
@@ -52,7 +55,7 @@ Role annotation is the task of determining the role of each sentence in the answ
 Annotations for this task is stored in `data/role_annotation.jsonl`, which contains 755 (question, answer) pairs with sentence-level role annotation.
 
 Each example is a json with the following fields:
-* `dataset`: The dataset this QA pair belongs to, one of [`NQ`, `ELI5`, `Web-GPT`]. Note that `ELI5` contains both human-written answers and model-generated answers, with model-generated answer distinguished with the `a_id` field mentioned below.
+* `dataset`: The dataset this QA pair belongs to, one of [`NQ`, `ELI5`, `Web-GPT`, `ELI5_MODEL`]. 
 * `q_id`: The question id, same as the original NQ or ELI5 dataset.
 * `a_id`: The answer id, same as the original ELI5 dataset. For NQ, we populate a dummy `a_id` (1). For machine generated answers, this field corresponds to the name of the model. 
 * `question`: The question.
@@ -105,6 +108,7 @@ Here is a single NQ complex example:
  'split': 'validation'
 }
 ```
+
 
 ## Model
 
@@ -180,4 +184,4 @@ If you find our work helpful, please cite us as
 }
 ```
 
-Please contact Fangyuan Xu at `fangyuan[at]utexas.edu` if you have any questions or suggestions.
+📧 Please contact Fangyuan Xu at `fangyuan[at]utexas.edu` if you have any questions or suggestions.
