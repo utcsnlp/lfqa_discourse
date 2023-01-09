@@ -141,7 +141,7 @@ $ pip install -r requirements.txt
 ```
 
 ### Download the pre-trained model
-Download the model from this [link](https://drive.google.com/file/d/1L_DbGhFqN-KBPJeTDFCAvX3RPZELJE9R/view?usp=sharing) and place it in the `model` directory.
+Download the model from this [link](https://drive.google.com/file/d/1L_DbGhFqN-KBPJeTDFCAvX3RPZELJE9R/view?usp=sharing) and place it in the `models` directory.
 
 ### Generate input data 
 To generate input data for role prediction, run the following script and pass in a csv file to ```-raw_data_path``` with two columns: ```question``` and ```answer```.
