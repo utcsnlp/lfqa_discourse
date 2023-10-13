@@ -147,27 +147,19 @@ Download the model from this [link](https://drive.google.com/file/d/1L_DbGhFqN-K
 To generate input data for role prediction, run the following script and pass in a csv file to ```-raw_data_path``` with two columns: ```question``` and ```answer```.
 See `role_classifier/data/raw/sample_data.csv` for an example.
 ```bash
-python generate_t5_input_csv_file.py \
+python generate_t5_input_json_file.py \
 --raw_data_path data/raw/sample_qa_data.csv \
 --output_file_dir data/t5/
 ```
 
 ### Run predictions with pre-trained model 
-Pass the generated file to ```test_file```, below is an example using the testing data. Sentence-level prediction will be saved to `<output_dir>/test_prediction.csv`
+Pass the generated file to ```input_json_file_path```, below is an example using the testing data. Sentence-level prediction will be saved to `sample_input_roles.json`
 
 ```bash
 # t5 
 python run_t5_role_classifier.py \
---train_file data/t5/train.csv \
---validation_file data/t5/validation.csv \
---test_file data/t5/test.csv \
---output_dir outputs/t5/test/ \
---do_predict \
---overwrite_output_dir \
---evaluation_strategy epoch \
---predict_with_generate \
---num_train_epoch 0 \
---model_name_or_path models/t5/
+--input_json_file_path data/t5/sample_input.json \
+--output_json_file_path sample_input_roles.json
 ```
 
 
